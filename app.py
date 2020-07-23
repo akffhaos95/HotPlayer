@@ -7,7 +7,7 @@ redis = Redis(host='redis', port=6379)
 @app.route("/")
 def home():
     redis.incr('hits')
-    return "You hits %s"%redis.get('hits')
+    return "You hits %d"%redis.get('hits')
 
 
 if __name__=="__main__":
