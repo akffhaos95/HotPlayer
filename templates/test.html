@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<!--
+	Interphase by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Elements - Interphase by TEMPLATED</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+	</head>
+	<body>
+		<table class="table">
+			<thead>
+				<th>이름</th>
+				<th>브랜드</th>
+			</thead>
+            <tbody>
+            {% for i in result %}
+              <tr>
+                <th scope="row">{{i['name']}}</th>
+                <td>{{i['brand']}}</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+	</body>
+</html>

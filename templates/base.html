@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+		<script src="/static/js/jquery.min.js"></script>
+		<script src="/static/js/skel.min.js"></script>
+		<script src="/static/js/skel-layers.min.js"></script>
+		<script src="/static/js/init.js"></script>
+		<link rel="stylesheet" href="/static/css/skel.css" />
+		<link rel="stylesheet" href="/static/css/style.css" />
+		<link rel="stylesheet" href="/static/css/style-xlarge.css" />
+
+	  <title>
+        {% block title %}{% endblock %}
+    </title>
+  </head>
+  <body>
+    <!-- Header -->
+			<header id="header">
+				<h1><a href="index.html">Interphase</a></h1>
+				<nav id="nav">
+					<ul>
+						<li><a href="/">Home</a></li>
+						<li><a href="/list">List</a></li>
+						<li><a href="/test">Test</a></li>
+					</ul>
+				</nav>
+			</header>
+    {% block content %}{% endblock %}
+  </body>
+</html>
