@@ -2,4 +2,3 @@ flask
 redis
 flask_sqlalchemy
 pymysql
-folium
