@@ -1,4 +1,4 @@
-FROM python:3.6-alpine
+FROM ubuntu:18.04
 
 WORKDIR /app
 COPY . /app
