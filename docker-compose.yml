@@ -7,5 +7,12 @@ services:
       - "5000:5000"
     depends_on:
       - redis
+  mysql:
+    build: mysql-server
+    environment:
+      MYSQL_DATABASE: test
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_HOST: 0.0.0.0
+      MYSQL_PASSWORD: qwer1234
   redis:
     image: "redis"
