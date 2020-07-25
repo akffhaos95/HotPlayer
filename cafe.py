@@ -1,5 +1,4 @@
-import requests, pandas as pd
-import pymysql
+import requests, pandas as pd, pymysql
 
 class Database():
     def create_conn(self):
@@ -27,15 +26,6 @@ class Database():
         c.execute(sql)
         conn.commit()
         c.close()
-    def select_all_books(self):
-        conn = self.create_conn()
-        c = conn.cursor()
-        sql = 'SELECT * FROM CAFE'
-        c.execute(sql)
-        books = c.fetchall()
-        c.close()
-        conn.close()
-        return 
     def insert_books(self, item):
         conn = self.create_conn()
         c = conn.cursor()
@@ -73,48 +63,32 @@ def get_cafe_location(query, lng, loc, radius, key):
 
 if __name__ == "__main__":
     db = Database()
-    while True:
-        num = int(input('>>>>>'))
-        if num == 1:
-            #1. 테이블 생성
-            db.create_table()
-        elif num == 2:
-            #7. 데이터 삽입하기    
-            name, x, y = [], [], []
-            key = "f3ff022cb1217ebafbcdb6e7ef9d026f"
-            cafe_list = ['스타벅스', '이디야', '투썸플레이스', '설빙', '탐앤탐스', '핸즈커피', '엔제리너스','파스쿠찌'] 
-            subway_list = ['대구 1호선', '대구 2호선', '대구 3호선','경산'] 
-            radius = 1000
+    #테이블 생성
+    db.create_table()
+    #데이터 삽입하기    
+    name, x, y = [], [], []
 
-            for i in subway_list:
-                name1, x1, y1 = get_station_location(i, key)
-                name += name1
-                x += x1
-                y += y1
-            for query in cafe_list:
-                cafe_name, cafe_x, cafe_y = [], [], []
-                for i in range(len(name)):
-                    cafe_name1, cafe_x1, cafe_y1 = get_cafe_location(query, x[i], y[i], radius,key)
-                    for i in range(len(cafe_name1)):
-                        if cafe_name1[i] not in cafe_name:
-                            cafe_name.append(cafe_name1[i])
-                            cafe_x.append(cafe_x1[i])
-                            cafe_y.append(cafe_y1[i])
-                for i in range(len(cafe_name)):
-                    cafe = [cafe_name[i], cafe_x[i], cafe_y[i], query]
-                    db.insert_books(cafe)
-                    print("insert", cafe)
-        elif num == 8:
-            quit()
-
+    key = "f3ff022cb1217ebafbcdb6e7ef9d026f"
     
-# from folium.plugins import MarkerCluster
+    cafe_list = ['스타벅스', '이디야', '투썸플레이스', '설빙', '탐앤탐스', '핸즈커피', '엔제리너스','파스쿠찌'] 
+    subway_list = ['대구 1호선', '대구 2호선', '대구 3호선','경산'] 
+    radius = 1000
 
-# map_osm = folium.Map(location=[35.8777653991529, 128.628499166642], zoom_start=13)
-# marker_cluster = MarkerCluster().add_to(map_osm)
-# for row in df.iterrows():
-#     folium.Marker([row[1]['y'],row[1]['x']], popup=row[1]['name'], icon=folium.Icon(color='orange')).add_to(marker_cluster)
-# for row in df2.iterrows():
-#     folium.Circle([row[1]['y'], row[1]['x']],radius=radius).add_to(map_osm)
-
-# map_osm
+    for i in subway_list:
+        name1, x1, y1 = get_station_location(i, key)
+        name += name1
+        x += x1
+        y += y1
+    for query in cafe_list:
+        cafe_name, cafe_x, cafe_y = [], [], []
+        for i in range(len(name)):
+            cafe_name1, cafe_x1, cafe_y1 = get_cafe_location(query, x[i], y[i], radius,key)
+            for i in range(len(cafe_name1)):
+                if cafe_name1[i] not in cafe_name:
+                    cafe_name.append(cafe_name1[i])
+                    cafe_x.append(cafe_x1[i])
+                    cafe_y.append(cafe_y1[i])
+        for i in range(len(cafe_name)):
+            cafe = [cafe_name[i], cafe_x[i], cafe_y[i], query]
+            db.insert_books(cafe)
+            print("insert", cafe)
