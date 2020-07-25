@@ -1,6 +1,7 @@
 from flask import Flask, render_template, json, url_for
 from flask_sqlalchemy import SQLAlchemy
-import pymysql, folium, os
+import pymysql, os
+#import folium
 #from redis import Redis
 
 app = Flask(__name__)
@@ -59,9 +60,10 @@ def test():
 
 @app.route('/map')
 def test2():
-    start_coords = (46.9540700, 142.7360300)
-    folium_map = folium.Map(location=start_coords, zoom_start=14)
-    return folium_map._repr_html_()
+    # start_coords = (46.9540700, 142.7360300)
+    # folium_map = folium.Map(location=start_coords, zoom_start=14)
+    return "map test" 
+    # folium_map._repr_html_()
 
 if __name__=="__main__":
     app.run(debug=True, host="0.0.0.0")
