@@ -13,7 +13,7 @@
 		<link rel="stylesheet" href="/static/css/skel.css" />
 		<link rel="stylesheet" href="/static/css/style.css" />
 		<link rel="stylesheet" href="/static/css/style-xlarge.css" />
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 	</head>
 	<body>
 		<!-- Header -->
@@ -36,69 +36,24 @@
 						<h2>Generic</h2>
 						<p>Lorem ipsum dolor sit amet nullam id egestas urna aliquam</p>
 					</header>
-
-					<a href="#" class="image fit">
-						<div style="width:800px">
-							<canvas id="myChart"></canvas>
-						</div>
-						<meta id='station' data-name="{{station}}">
-						<meta id='time' data-name="{{time}}">
-						<script>
-						var station = $('#station').data()['name'].split(',');;
-						var time = $('#time').data()['name'];
-						var ctx = document.getElementById("myChart").getContext('2d');
-						var myChart = new Chart(ctx, {
-							type: 'line',
-							data: {
-								labels: ['18', '19', '20', '21', '22', '23'],
-								datasets: [{
-									label: station[0],
-									data: time[0]
-								},{
-									label: station[1],
-									data: time[1]
-								},{
-									label: station[2],
-									data: time[2]
-								}
-							]},							
-							options: {
-								responsive: true,
-								title: {
-									display: true,
-									text: '라인 차트 테스트'
-								},
-								tooltips: {
-									mode: 'index',
-									intersect: false,
-								},
-								hover: {
-									mode: 'nearest',
-									intersect: true
-								},
-								scales: {
-									xAxes: [{
-										display: true,
-										scaleLabel: {
-											display: true,
-											labelString: 'x축'
-										}
-									}],
-									yAxes: [{
-										display: true,
-										ticks: {
-											suggestedMin: 0,
-										},
-										scaleLabel: {
-											display: true,
-											labelString: 'y축'
-										}
-									}]
-								}
-							}
-						});
-						</script>
-					</a>
+					<button class="update"> update </button>
+					
+					<button onclick="subwayTime('up', '아침');"> up_morning </button>
+					<button onclick="subwayTime('up', '오전');"> up_am </button>
+					<button onclick="subwayTime('up', '점심');"> up_launch </button>
+					<button onclick="subwayTime('up', '오후');"> up_pm </button>
+					<button onclick="subwayTime('up', '저녁');"> up_dinner </button>
+					
+					<button onclick="subwayTime('down', '아침');"> down_morning </button>
+					<button onclick="subwayTime('down', '오전');"> down_am </button>
+					<button onclick="subwayTime('down', '점심');"> down_launch </button>
+					<button onclick="subwayTime('down', '오후');"> down_pm </button>
+					<button onclick="subwayTime('down', '저녁');"> down_dinner </button>
+					
+					<div><canvas id="myChart" width="400" height="400"></canvas></div>
+					<script>
+						
+					</script>
 					<p>Vis accumsan feugiat adipiscing nisl amet adipiscing accumsan blandit accumsan sapien blandit ac amet faucibus aliquet placerat commodo. Interdum ante aliquet commodo accumsan vis phasellus adipiscing. Ornare a in lacinia. Vestibulum accumsan ac metus massa tempor. Accumsan in lacinia ornare massa amet. Ac interdum ac non praesent. Cubilia lacinia interdum massa faucibus blandit nullam. Accumsan phasellus nunc integer. Accumsan euismod nunc adipiscing lacinia erat ut sit. Arcu amet. Id massa aliquet arcu accumsan lorem amet accumsan.</p>
 					<p>Amet nibh adipiscing adipiscing. Commodo ante vis placerat interdum massa massa primis. Tempus condimentum tempus non ac varius cubilia adipiscing placerat lorem turpis at. Aliquet lorem porttitor interdum. Amet lacus. Aliquam lobortis faucibus blandit ac phasellus. In amet magna non interdum volutpat porttitor metus a ante ac neque. Nisi turpis. Commodo col. Interdum adipiscing mollis ut aliquam id ante adipiscing commodo integer arcu amet Ac interdum ac non praesent. Cubilia lacinia interdum massa faucibus blandit nullam. Accumsan phasellus nunc integer. Accumsan euismod nunc adipiscing lacinia erat ut sit. Arcu amet. Id massa aliquet arcu accumsan lorem amet accumsan commodo odio cubilia ac eu interdum placerat placerat arcu commodo lobortis adipiscing semper ornare pellentesque.</p>
 					<p>Amet nibh adipiscing adipiscing. Commodo ante vis placerat interdum massa massa primis. Tempus condimentum tempus non ac varius cubilia adipiscing placerat lorem turpis at. Aliquet lorem porttitor interdum. Amet lacus. Aliquam lobortis faucibus blandit ac phasellus. In amet magna non interdum volutpat porttitor metus a ante ac neque. Nisi turpis. Commodo col. Interdum adipiscing mollis ut aliquam id ante adipiscing commodo integer arcu amet blandit adipiscing arcu ante.</p>
@@ -163,6 +118,6 @@
 					</ul>
 				</div>
 			</footer>
-
 	</body>
+	<script src="{{ url_for('static', filename='js/subwayTime.js') }}"></script>
 </html>
