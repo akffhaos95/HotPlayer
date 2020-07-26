@@ -7,26 +7,17 @@ getData.done(function (result) {
     console.log(result.time);
     console.log(result.score);
     
-    
+    var datasets;
+    for(var i=0; i<result.score.length; i++){
+        datasets.push({ 
+            label : result.time[i],
+            data: result.score[i]       
+        })
+    }
     var ctx = document.getElementById('myChart').getContext("2d");
     var data = {
         labels: ['Mon', 'Tue', 'Wed', 'Thr', 'Fri'],
-        datasets: [
-        {
-            label: "Blue",
-            fillColor: "blue",
-            data: [3,7,4]
-        },
-        {
-            label: "Red",
-            fillColor: "red",
-            data: [4,3,5]
-        },
-        {
-            label: "Green",
-            fillColor: "green",
-            data: [7,2,6]
-        }]
+        datasets: [ datasets ]
     };
     var options = {
         width: 800,
