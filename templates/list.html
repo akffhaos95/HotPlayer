@@ -13,6 +13,7 @@
 		<link rel="stylesheet" href="/static/css/skel.css" />
 		<link rel="stylesheet" href="/static/css/style.css" />
 		<link rel="stylesheet" href="/static/css/style-xlarge.css" />
+		<link rel="stylesheet" href="/static/css/dropdown.css" />
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 	</head>
 	<body>
@@ -39,19 +40,20 @@
 					
 					<div><canvas id="myChart"></canvas></div>
 					
-					<button onclick="updateChart('up', 'total', '아침');"> up_morning </button>
-					<button onclick="updateChart('up', 'total', '오전');"> up_am </button>
-					<button onclick="updateChart('up', 'total', '점심');"> up_launch </button>
-					<button onclick="updateChart('up', 'total', '오후');"> up_pm </button>
-					<button onclick="updateChart('up', 'total', '저녁');"> up_dinner </button>
+					<div>
+					{% for j in time %}
+						<div class="dropdown">
+							<button class="dropbtn">{{j}}</button>
+							<div class="dropdown-content">
+								{% for i in list %}
+									<a onclick="updateChart('up', '{{i}}', '{{j}}');"> {{i}} 승차 </a>
+								{% endfor %}
+							</div>
+						</div>
+					{% endfor %}	
+					</div>				
 					
-					<button onclick="updateChart('down', 'total', '아침');"> down_morning </button>
-					<button onclick="updateChart('down', 'total', '오전');"> down_am </button>
-					<button onclick="updateChart('down', 'total', '점심');"> down_launch </button>
-					<button onclick="updateChart('down', 'total', '오후');"> down_pm </button>
-					<button onclick="updateChart('down', 'total', '저녁');"> down_dinner </button>
-					
-					<p id="description">des1</p>
+					<p class="analysis"></p>
 					
 				</div>
 			</section>

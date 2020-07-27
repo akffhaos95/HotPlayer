@@ -38,6 +38,7 @@ getData.done(function (result) {
     var ctx = document.getElementById('myChart').getContext("2d");
     var options = {}
     myChart = new Chart(ctx, { type: 'bar', data: data, options: options });
+    $('.analysis').text(result.analysis);
 });
 
 function updateChart(up_down, line, time) {
@@ -46,5 +47,6 @@ function updateChart(up_down, line, time) {
         var data = make_data(result);
         myChart.data = data;
         myChart.update();
+        $('.analysis').text(result.analysis);
     });
 }

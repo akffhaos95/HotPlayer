@@ -17,7 +17,10 @@ def home():
 #지하철 정보 페이지
 @app.route("/list")
 def list():
-    return render_template("list.html")
+    up_down = ['up', 'down']
+    list = ['total', 'one', 'two', 'thr']
+    time = ['아침', '오전', '점심', '오후', '저녁', '밤']
+    return render_template("list.html", up_down = up_down, list = list, time = time)
 
 #지하철 정보
 @app.route("/subwayTime/<up_down>/<line>/<time>")
@@ -35,10 +38,10 @@ def subwayTime(up_down = 'up', line = 'total', time = '아침'):
         for j in range(1, len(lab)):
             tmp.append(i[time[j]])
         score.append(tmp)
-    return jsonify({'label': label, 'time': time, 'score': score})
+    analysis = json_url
+    return jsonify({'label': label, 'time': time, 'score': score, 'analysis': analysis})
 
 #카페 정보 페이지
-#DB 정보, Folium, Ranking
 @app.route("/cafe")
 def cafe2():
     return render_template("cafescore.html")
