@@ -17,21 +17,25 @@ def home():
 #지하철 정보 페이지
 @app.route("/list")
 def list():
+    return render_template("list.html")
+
+#지하철 정보
+@app.route("/subwayTime/<up_down>/<line>/<time>")
+def subwayTime(up_down = 'up', line = 'total', time = '아침'):
     SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
-    json_url = os.path.join(SITE_ROOT, 'static', 'data/up_total_아침_head.json')
+    json_url = os.path.join(SITE_ROOT, 'static', 'data/'+up_down+'_'+line+'_'+time+'_head.json')
     data = json.load(open(json_url))
     label, time, score = [], [], []
     lab = data['schema']['fields']
     for i in lab:
         time.append(i['name'])
-    print(time)
     for i in data['data']:
         label.append(i['역명'])
         tmp = []
         for j in range(1, len(lab)):
             tmp.append(i[time[j]])
         score.append(tmp)
-    return render_template("list.html", label=label, time=time, score=score)
+    return jsonify({'label': label, 'time': time, 'score': score})
 
 #카페 정보 페이지
 #DB 정보, Folium, Ranking
@@ -50,24 +54,6 @@ def test():
         for line in cafe:
             print(line[1])
     return render_template("test.html", result = cafe)
-
-@app.route("/subwayTime/")
-def subwayTime():
-    SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
-    json_url = os.path.join(SITE_ROOT, 'static', 'data/up_total_아침_head.json')
-    data = json.load(open(json_url))
-    label, time, score = [], [], []
-    lab = data['schema']['fields']
-    for i in lab:
-        time.append(i['name'])
-    print(time)
-    for i in data['data']:
-        label.append(i['역명'])
-        tmp = []
-        for j in range(1, len(lab)):
-            tmp.append(i[time[j]])
-        score.append(tmp)
-    return jsonify({'label': label, 'time': time, 'score': score})
     
 @app.route('/map')
 def test2():
