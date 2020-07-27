@@ -728,7 +728,7 @@
 		background-color: #3ba666;
 		border-radius: 4px;
 		border: 0;
-		color: #ffffff !important;
+		color: #000000 !important;
 		cursor: pointer;
 		display: inline-block;
 		font-weight: 400;
@@ -860,14 +860,14 @@
 /* Header */
 
 	body.landing #header {
-		background-color: transparent;
+		/* background-color: transparent; */
 		left: 0;
 		position: absolute;
 		top: 0;
 	}
 
 	#header {
-		background-color: #202222;
+		background-color: #29CFC1;
 		color: #ffffff;
 		cursor: default;
 		height: 4.75em;
@@ -957,12 +957,12 @@
 /* Banner */
 
 	#banner {
-		background: url("images/overlay.png"), url("../images/banner.jpg");
+		background-color: #F7F7F7;
 		background-position: center;
 		background-repeat: no-repeat;
 		background-size: cover;
-		color: #ffffff;
-		padding: 16em 0em 14em;
+		color: #575151;
+		padding: 8em 0em 8em;
 		text-align: center;
 	}
 
@@ -985,7 +985,7 @@
 
 		#banner .button {
 			background-color: transparent;
-			border: 1px solid #ffffff;
+			border: 1px solid #353535;
 			font-weight: 300;
 		}
 

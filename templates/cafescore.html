@@ -1,9 +1,4 @@
 <!DOCTYPE html>
-<!--
-	Interphase by TEMPLATED
-	templated.co @templatedco
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
--->
 <html lang="en">
 
 <head>
@@ -12,7 +7,6 @@
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
-	<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
 	<script src="/static/js/jquery.min.js"></script>
 	<script src="/static/js/skel.min.js"></script>
 	<script src="/static/js/skel-layers.min.js"></script>
@@ -21,18 +15,17 @@
 	<link rel="stylesheet" href="/static/css/style.css" />
 	<link rel="stylesheet" href="/static/css/style-xlarge.css" />
 	<link rel="stylesheet" href="/static/css/dropdown.css" />
-	<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
 </head>
 
 <body>
 	<!-- Header -->
 	<header id="header">
-		<h1><a href="index.html">Interphase</a></h1>
+		<h1><a href="/"> <img src="/static/images/logo2.png" style="width :80x; height:82.33px;"></a></h1>
 		<nav id="nav">
 			<ul>
-				<li><a href="index.html">Home</a></li>
-				<li><a href="generic.html">지하철 유동인구</a></li>
-				<li><a href="elements.html">카페 지수</a></li>
+				<li style="font-weight: 600;"><a href="/">Home</a></li>
+				<li style="font-weight: 600;"><a href="/list">Subway</a></li>
+				<li style="font-weight: 600;"><a href="/cafe">Cafe</a></li>
 			</ul>
 		</nav>
 	</header>
@@ -40,120 +33,73 @@
 	<section id="main" class="wrapper">
 		<div class="container">
 			<header class="major">
-				<h3>카페 지수</h3>
+				<h3 style="font-weight: 600;">카페 지수</h3>
 				<h4>지하철역을 선택하면, 근처 카페 종류를 알려드립니다.</h4>
-			</header>
-			<h3>Top cafe list</h3>
-			<!-- <h4>Default</h4> -->
-
-			<div class="table-wrapper" style="width:50%; float:left; margin-right:20px;">
-				<table>
-					<thead>
-						<tr>
-							<th>순위</th>
-							<th>카페 종류</th>
-							<th>갯수</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>1</td>
-							<td>이디야</td>
-							<td>35</td>
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>스타벅스</td>
-							<td>20</td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>파스꾸찌</td>
-							<td>12</td>
-						</tr>
-						<tr>
-							<td>4</td>
-							<td>설빙</td>
-							<td>3</td>
-						</tr>
-					</tbody>
-					<tfoot>
-						<tr>
-							<td colspan="2"></td>
-							<td>100.00</td>
-						</tr>
-					</tfoot>
-				</table>
-
-			</div>
-
-
-			<div style="float:left;">
-				<img src="images/logo.png">
-			</div>
-			<div style="clear:both"></div>
-			<br></br>
-			<div class="dropdown">
-				<button class="dropbtn">지하철역 선택</button>
-				<div class="dropdown-content">
-					<a href="#">반월당/중앙로역</a>
-					<a href="#">동대구역</a>
-					<a href="#">상인역</a>
+				<div class="dropdown">
+					<button class="dropbtn"
+						style=" border-radius: 10px; box-shadow: 0 3px 0 #0e8c73; font-weight: 600;">지하철역 선택</button>
+					<div class="dropdown-content">
+						<a onclick="updateMap('반월당', '스타벅스');">스타벅스</a>
+						<a onclick="updateMap('반월당', '이디야');">이디야</a>
+						<a onclick="updateMap('반월당', '투썸플레이스');">투썸플레이스</a>
+						<a onclick="updateMap('반월당', '설빙');">설빙</a>
+						<a onclick="updateMap('반월당', '핸즈커피');">핸즈커피</a>
+						<a onclick="updateMap('반월당', '엔제리너스');">엔제리너스</a>
+						<a onclick="updateMap('반월당', '파스쿠찌');">파스쿠찌</a>
+					</div>
 				</div>
-			</div>
+		</div>
+		<script>
+			function updateMap(station, cafe) {
+				document.getElementById("cafe_map").src = "http://localhost:5000/cafeMap/"+station+'/'+cafe;
+			}
+		</script>
+		</header>
+
+		<!-- <section>-->
+		<h3>Top cafe list</h3>
+
+		<div class="table-wrapper" style="width:30%; float:left; margin-right:20px;">
+			<table>
+				<thead>
+					<tr>
+						<th>순위</th>
+						<th>카페 종류</th>
+						<th>갯수</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>이디야</td>
+						<td>35</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>스타벅스</td>
+						<td>20</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="2"></td>
+						<td>100</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+		<div style="float:left;">
+			<iframe id="cafe_map" width="500" height="500" src="http://localhost:5000/cafeMap/테스트/테스트"></iframe>
+		</div>
+		<div style="clear:both"></div>
+		<br></br>
+
 		</div>
 	</section>
 
 	<!-- Footer -->
 	<footer id="footer">
 		<div class="container">
-			<div class="row">
-				<section class="4u 6u(medium) 12u$(small)">
-					<h3>Lorem ipsum</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, cumque!</p>
-					<ul class="alt">
-						<li><a href="#">Lorem ipsum dolor sit amet.</a></li>
-						<li><a href="#">Quod adipisci perferendis et itaque.</a></li>
-						<li><a href="#">Itaque eveniet ullam, veritatis reiciendis?</a></li>
-						<li><a href="#">Accusantium repellat accusamus a, soluta.</a></li>
-					</ul>
-				</section>
-				<section class="4u 6u$(medium) 12u$(small)">
-					<h3>Nostrum, repellat!</h3>
-					<p>Tenetur voluptate exercitationem eius tempora! Obcaecati suscipit, soluta earum blanditiis.</p>
-					<ul class="alt">
-						<li><a href="#">Lorem ipsum dolor sit amet.</a></li>
-						<li><a href="#">Id inventore, qui necessitatibus sunt.</a></li>
-						<li><a href="#">Deleniti eum odit nostrum eveniet.</a></li>
-						<li><a href="#">Illum consectetur quibusdam eos corporis.</a></li>
-					</ul>
-				</section>
-				<section class="4u$ 12u$(medium) 12u$(small)">
-					<h3>Contact Us</h3>
-					<ul class="icons">
-						<li><a href="#" class="icon rounded fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon rounded fa-facebook"><span class="label">Facebook</span></a></li>
-						<li><a href="#" class="icon rounded fa-pinterest"><span class="label">Pinterest</span></a></li>
-						<li><a href="#" class="icon rounded fa-google-plus"><span class="label">Google+</span></a></li>
-						<li><a href="#" class="icon rounded fa-linkedin"><span class="label">LinkedIn</span></a></li>
-					</ul>
-					<ul class="tabular">
-						<li>
-							<h3>Address</h3>
-							1234 Somewhere Road<br>
-							Nashville, TN 00000
-						</li>
-						<li>
-							<h3>Mail</h3>
-							<a href="#">someone@untitled.tld</a>
-						</li>
-						<li>
-							<h3>Phone</h3>
-							(000) 000-0000
-						</li>
-					</ul>
-				</section>
-			</div>
 			<ul class="copyright">
 				<li>&copy; Untitled. All rights reserved.</li>
 				<li>Design: <a href="http://templated.co">TEMPLATED</a></li>
@@ -161,7 +107,5 @@
 			</ul>
 		</div>
 	</footer>
-
 </body>
-
 </html>
