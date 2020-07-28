@@ -21,7 +21,7 @@ def list():
     up_down = ['up', 'down']
     list = ['total', 'one', 'two', 'thr']
     time = ['아침', '오전', '점심', '오후', '저녁', '밤']
-    return render_template("list2.html", up_down = up_down, list = list, time = time)
+    return render_template("list.html", up_down = up_down, list = list, time = time)
 
 #지하철 정보
 @app.route("/subwayTime/<up_down>/<line>/<time>")
@@ -47,22 +47,33 @@ def subwayTime(up_down = 'up', line = 'total', time = '아침'):
 def cafe():
     return render_template('cafescore.html')
 
-@app.route("/cafeMap/<station>/<cafe>")
-def cafeMap(station = '', cafe = ''):
-    SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
-    csv_url = os.path.join(SITE_ROOT, 'static', 'data/cafe.csv')
-    start_coords = (35.8394, 128.757)
-    folium_map = folium.Map(location=start_coords, zoom_start=10)
-    with open(csv_url, 'r', encoding='utf-8') as f:
-        cafe_list = csv.reader(f)
-        for i in cafe_list:
-            if i[4] == cafe:
-                folium.Marker([i[3],i[2]], popup=i[1], icon=folium.Icon(color='orange')).add_to(folium_map)
-    return folium_map._repr_html_()
-
-@app.route("/cafeMap2/<query>")
-def cafeMapQuery(query = ''):
+@app.route("/cafeMap/<query>")
+def cafeMapQuery(query = '탐앤탐스'):
     return make_map.ret_map(query)
     
+@app.route("/heat")
+def head():
+    return render_template('heat.html')
+
+@app.route("/heatMap/<query>")
+def heatMap(query = "line1"):
+    SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
+    heat_url = os.path.join(SITE_ROOT, 'static', 'data/heat_'+query+'.json')   
+    data = json.load(open(heat_url))
+
+    station, heat, brand = [], [], []
+    lab = data['schema']['fields']
+    for i in lab:
+        station.append(i['name'])
+    station = station[1:]
+
+    for i in data['data']:
+        tmp = []
+        for _, k in i.items():
+            tmp.append(k)
+        brand.append(tmp[0])
+        heat.append(tmp[1:])
+    return jsonify({'station': station, 'heat': heat, 'brand': brand})
+
 if __name__=="__main__":
     app.run(debug=True, host="0.0.0.0")

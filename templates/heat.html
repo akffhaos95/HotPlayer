@@ -1,64 +1,60 @@
-
 <!DOCTYPE html>
 <html lang="en">
-    
-    <head>
-        <meta charset="UTF-8">
-	<title>Generic - Interphase by TEMPLATED</title>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<meta name="description" content="" />
-	<meta name="keywords" content="" />
-	<script src="/static/js/jquery.min.js"></script>
-	<script src="/static/js/skel.min.js"></script>
-	<script src="/static/js/skel-layers.min.js"></script>
-	<script src="/static/js/init.js"></script>
-	<link rel="stylesheet" href="/static/css/skel.css" />
-	<link rel="stylesheet" href="/static/css/style.css" />
-	<link rel="stylesheet" href="/static/css/style-xlarge.css" />
-	<link rel="stylesheet" href="/static/css/dropdown.css" />
-    <link rel="stylesheet" href="/static/js/Chart.HeatMap.S.js" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Generic - Interphase by TEMPLATED</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/skel.min.js"></script>
+    <script src="/static/js/skel-layers.min.js"></script>
+    <script src="/static/js/init.js"></script>
+    <link rel="stylesheet" href="/static/css/skel.css" />
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="stylesheet" href="/static/css/style-xlarge.css" />
+    <link rel="stylesheet" href="/static/css/dropdown.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 </head>
 
 <body>
-	<!-- Header -->
-	<header id="header">
-		<h1><a href="/"> <img src="/static/images/logo2.png" style="width :80x; height:82.33px;"></a></h1>
-		<nav id="nav">
-			<ul>
-				<li style="font-weight: 600;"><a href="/">Home</a></li>
-				<li style="font-weight: 600;"><a href="/list">Subway</a></li>
-				<li style="font-weight: 600;"><a href="/cafe">Cafe</a></li>
-			</ul>
-		</nav>
-	</header>
+    <!-- Header -->
+    <header id="header">
+        <h1><a href="/"> <img src="/static/images/logo2.png" style="width :80x; height:82.33px;"></a></h1>
+        <nav id="nav">
+            <ul>
+                <li style="font-weight: 600;"><a href="/">Home</a></li>
+                <li style="font-weight: 600;"><a href="/list">Subway</a></li>
+                <li style="font-weight: 600;"><a href="/cafe">Cafe</a></li>
+            </ul>
+        </nav>
+    </header>
 
-	<!-- Main -->
-	<section id="main" class="wrapper">
-		<div class="container">
+    <!-- Main -->
+    <section id="main" class="wrapper">
+        <div class="container">
 
-			<header class="major">
-				<h2 style="font-weight: 600;">지하철 유동인구</h2>
-				<p>대구시의 지하철 유동인구를 확인하고 높은 지역이 실제로 상권이 활성화 되어 있는지 시각적으로 확인할 수 있습니다.</p>
-			</header>
+            <header class="major">
+                <h2 style="font-weight: 600;">지하철 유동인구</h2>
+                <p>대구시의 지하철 유동인구를 확인하고 높은 지역이 실제로 상권이 활성화 되어 있는지 시각적으로 확인할 수 있습니다.</p>
+            </header>
 
-			<div><canvas id="myChart"></canvas></div>
-			<p class="analysis"></p>
+            <div><canvas id="heatMap" width="800" height="400"></canvas></div>
+        </div>
+    </section>
 
-		</div>
-	</section>
-
-	<!-- Footer -->
-	<footer id="footer">
-		<div class="container">
-			<ul class="copyright">
-				<li>&copy; Untitled. All rights reserved.</li>
-				<li>Design: <a href="http://templated.co">TEMPLATED</a></li>
-				<li>Images: <a href="http://unsplash.com">Unsplash</a></li>
-			</ul>
-		</div>
-	</footer>
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="container">
+            <ul class="copyright">
+                <li>&copy; Untitled. All rights reserved.</li>
+                <li>Design: <a href="http://templated.co">TEMPLATED</a></li>
+                <li>Images: <a href="http://unsplash.com">Unsplash</a></li>
+            </ul>
+        </div>
+    </footer>
 </body>
-<script src="{{ url_for('static', filename='js/subwayTime.js') }}"></script>
+<script src="{{ url_for('static', filename='js/heat.js') }}"></script>
 
 </html>
