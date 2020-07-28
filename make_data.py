@@ -1,9 +1,9 @@
 from scipy.spatial import distance
+from flask import Flask, json
 import os
 import folium
 import numpy as np
 import pandas as pd
-from flask import Flask, json
 
 def ret_subway(up_down, line, time):
     SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
@@ -19,6 +19,25 @@ def ret_subway(up_down, line, time):
         for j in range(1, len(lab)):
             tmp.append(i[time[j]])
         score.append(tmp)
+    return label, time, score
+
+def ret_day(day):
+    SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
+    json_url = os.path.join(SITE_ROOT, 'static', 'data/'+day+'_head.json')
+    data = json.load(open(json_url))
+    label, time, score = [], [], []
+    lab = data['schema']['fields']
+    for i in lab:
+        time.append(i['name'])
+    for i in data['data']:
+        label.append(i['역명'])
+        tmp = []
+        for j in range(1, len(lab)):
+            tmp.append(i[time[j]])
+        score.append(tmp)
+    print(label)
+    print(time)
+    print(score)
     return label, time, score
 
 def ret_map(query):
