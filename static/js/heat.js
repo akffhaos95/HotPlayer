@@ -5,45 +5,44 @@ var make_data = function (result) {
     var heat = result.heat;
     var station = result.station;
     var brand = result.brand;
-
-    var data = [];
-
-    for (var i = 0; i < result.station.length; i++) {
-        for (var j = 0; j < result.brand.length; j++) {
+    var dataset = [];
+   
+    for (var i = 0; i < result.brand.length; i++) {
+        var data = [];
+        for (var j = 0; j < result.station.length; j++) {
             data.push({
-                y: j,
-                x: i,
-                a: 1,
-                v: heat[j][i]
+                x: station[j],
+                y: heat[i][j]
             });
         }
+        dataset.push({
+            name: brand[i],
+            data: data
+        })
     }
-    return data;
+    return dataset;
 }
 
 getData.done(function (result) {
-    var ctx = document.getElementById('heatMap').getContext('2d');
-    var station = result.station;
-    var brand = result.brand;
+    var ctx = document.querySelector("#heatmap")
     var data = make_data(result);
 
-    console.log(data)
-    heatmap = new Chart(ctx, {
-        type: 'heatmap',
-        data: {
-            xLabels: station,
-            yLabels: brand,
-            datasets: [{
-                data: data
-            }]
-        },
-        options: {
-            yColors: [ // colors for each lines
-                { r: 0, g: 150, b: 136 },
-                { r: 255, g: 235, b: 59 },
-                { r: 255, g: 152, b: 0 },
-                { r: 244, g: 67, b: 54 }
-            ],
-        }
-    })
+    heatmap = new ApexCharts(ctx,
+        option = {
+            chart: {
+                type: 'heatmap'
+            },
+            series: data
+        });
+    heatmap.render();
 })
+
+function updateHeat(line) {
+    var updatedData = $.get('/heatMap/'+line);
+    updatedData.done(function (result) {
+        var data = make_data(result);
+        console.log(data);
+        heatmap.updateSeries(
+            data)
+    });
+}

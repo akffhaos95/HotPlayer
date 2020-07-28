@@ -1,35 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta name="description" content="" />
-		<meta name="keywords" content="" />
-		<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
-		<script src="/static/js/jquery.min.js"></script>
-		<script src="/static/js/skel.min.js"></script>
-		<script src="/static/js/skel-layers.min.js"></script>
-		<script src="/static/js/init.js"></script>
-		<link rel="stylesheet" href="/static/css/skel.css" />
-		<link rel="stylesheet" href="/static/css/style.css" />
-		<link rel="stylesheet" href="/static/css/style-xlarge.css" />
-
-	  <title>
-        {% block title %}{% endblock %}
-    </title>
-  </head>
-  <body>
-    <!-- Header -->
-			<header id="header">
-				<h1><a href="index.html">Interphase</a></h1>
-				<nav id="nav">
-					<ul>
-						<li><a href="/">Home</a></li>
-						<li><a href="/list">List</a></li>
-						<li><a href="/test">Test</a></li>
-					</ul>
-				</nav>
-			</header>
-    {% block content %}{% endblock %}
-  </body>
+{% block head %}
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<script src="/static/js/jquery.min.js"></script>
+	<script src="/static/js/skel.min.js"></script>
+	<script src="/static/js/skel-layers.min.js"></script>
+	<script src="/static/js/init.js"></script>
+	<style type="text/css">* {cursor: url(https://ani.cursors-4u.net/games/gam-16/gam1547.cur), auto !important;}</style><a href="http://www.cursors-4u.com/cursor/2014/03/05/minecraft-iron-sword.html" target="_blank" title="Minecraft - Iron Sword"><img src="http://cur.cursors-4u.net/cursor.png" border="0" alt="Minecraft - Iron Sword" style="position:absolute; top: 0px; right: 0px;" /></a>
+	
+	<link rel="stylesheet" href="/static/css/skel.css" />
+	<link rel="stylesheet" href="/static/css/style.css" />
+	<link rel="stylesheet" href="/static/css/style-xlarge.css" />
+	<link rel="stylesheet" href="/static/css/dropdown.css" />
+	<title>
+		{% block title %}{% endblock %}
+	</title>
+</head>
+{% endblock %}
+<body>
+	<!-- Header -->
+	<header id="header">
+		<h1><a href="/"> <img src="/static/images/logo2.png" style="width :80x; height:82.33px;"></a></h1>
+		<nav id="nav">
+			<ul>
+				<li style="font-weight: 600;"><a href="/">Home</a></li>
+				<li style="font-weight: 600;"><a href="/list">Subway</a></li>
+				<li style="font-weight: 600;"><a href="/cafe">Cafe</a></li>
+			</ul>
+		</nav>
+	</header>
+	{% block content %}{% endblock %}
+	{% block footer %}
+	<!-- Footer -->
+	<footer id="footer">
+		<div class="container">
+			<ul class="copyright">
+				<li>&copy; Untitled. All rights reserved.</li>
+				<li>Design: <a href="http://templated.co">TEMPLATED</a></li>
+				<li>Images: <a href="http://unsplash.com">Unsplash</a></li>
+			</ul>
+		</div>
+	</footer>
+	{% endblock %}
+</body>
 </html>

@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Cafe{% endblock %}
+{% block content %}
+<!-- Main -->
+<section id="main" class="wrapper" style="padding: 2em 0em 4em;">
+	<div class="container">
+		<header class="major">
+			<h3 style="font-weight: 600;">카페 지수</h3>
+			<h4>지하철역을 선택하면, 근처 카페 종류를 알려드립니다.</h4>
+		</header>
+	</div>
+
+	<div id='section_main' style="width:30%; height: 100%; float:left;">
+		<!-- <section>-->
+		<h3 style="margin-left:20px;">Top cafe list</h3>
+
+		<div class="table-wrapper" style="width:100%; height: 30%; margin-right:20px; margin-left:20px;">
+			<table>
+				<thead>
+					<tr>
+						<th>순위</th>
+						<th>카페 종류</th>
+						<th>갯수</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>이디야</td>
+						<td>35</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>스타벅스</td>
+						<td>20</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="2"></td>
+						<td>100</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+
+		<div class="btn" style="margin-right:20px; margin-left:20px;">
+			{% for i in cafe %}
+			<button class="dropbtn"
+				style=" border-radius: 10px; box-shadow: 0 3px 0 #0e8c73; font-weight: 600; margin-bottom: 10px;">
+				<div onclick="updateMap('{{i}}');">{{i}}</div>
+			</button>
+			{% endfor %}
+		</div>
+	</div>
+
+	<div style="float:right;">
+		<iframe id="cafe_map" width="1000px" height="500" src="http://localhost:5000/cafeMap/스타벅스"></iframe>
+	</div>
+	<div style="clear:both"></div>
+</section>
+<script>
+	function updateMap(cafe) {
+		document.getElementById("cafe_map").src = "http://localhost:5000/cafeMap/" + cafe;
+	}
+</script>
+{% endblock %}

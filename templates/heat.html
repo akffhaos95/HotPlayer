@@ -1,60 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Generic - Interphase by TEMPLATED</title>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-    <script src="/static/js/jquery.min.js"></script>
-    <script src="/static/js/skel.min.js"></script>
-    <script src="/static/js/skel-layers.min.js"></script>
-    <script src="/static/js/init.js"></script>
-    <link rel="stylesheet" href="/static/css/skel.css" />
-    <link rel="stylesheet" href="/static/css/style.css" />
-    <link rel="stylesheet" href="/static/css/style-xlarge.css" />
-    <link rel="stylesheet" href="/static/css/dropdown.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
-</head>
-
-<body>
-    <!-- Header -->
-    <header id="header">
-        <h1><a href="/"> <img src="/static/images/logo2.png" style="width :80x; height:82.33px;"></a></h1>
-        <nav id="nav">
-            <ul>
-                <li style="font-weight: 600;"><a href="/">Home</a></li>
-                <li style="font-weight: 600;"><a href="/list">Subway</a></li>
-                <li style="font-weight: 600;"><a href="/cafe">Cafe</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <!-- Main -->
-    <section id="main" class="wrapper">
-        <div class="container">
-
-            <header class="major">
-                <h2 style="font-weight: 600;">지하철 유동인구</h2>
-                <p>대구시의 지하철 유동인구를 확인하고 높은 지역이 실제로 상권이 활성화 되어 있는지 시각적으로 확인할 수 있습니다.</p>
-            </header>
-
-            <div><canvas id="heatMap" width="800" height="400"></canvas></div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="footer">
-        <div class="container">
-            <ul class="copyright">
-                <li>&copy; Untitled. All rights reserved.</li>
-                <li>Design: <a href="http://templated.co">TEMPLATED</a></li>
-                <li>Images: <a href="http://unsplash.com">Unsplash</a></li>
-            </ul>
-        </div>
-    </footer>
-</body>
+{% extends "base.html" %}
+{% block head %}
+{{ super() }}
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script src="{{ url_for('static', filename='js/heat.js') }}"></script>
-
-</html>
+{% endblock %}
+{% block title %}HeatMap{% endblock %}
+{% block content %}
+<!-- Main -->
+<section id="main" class="wrapper" style="padding: 2em 0em 4em;">
+    <div class="container">
+        <header class="major">
+            <h3 style="font-weight: 600;">지하철 카페 히트맵</h3>
+            <h4>대구시의 지하철역 반경 1Km의 카페 브랜드 입점 현황을 확인하고 어느 역에 브랜드 카페가 많이 분포되어 있는지 확인할 수 있습니다.</h4>
+        </header>
+        <div class="btn" style="margin-right:20px; margin-left:20px;">
+            {% for i in line %}
+            <button class="dropbtn" onclick="updateHeat('{{i}}');">
+                {% if i == 'line1' %}1호선
+				{% elif i == 'line2' %}2호선
+				{% elif i == 'line3' %}3호선
+				{% else %}전체
+				{% endif %}    
+            </button>
+            {% endfor %}
+        </div>
+        <div id="heatmap" style="width: 1100px; height: 500px"></div>
+    </div>
+</section>
+{% endblock %}

@@ -1,9 +1,25 @@
 from scipy.spatial import distance
 import os
-import requests
 import folium
 import numpy as np
 import pandas as pd
+from flask import Flask, json
+
+def ret_subway(up_down, line, time):
+    SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
+    json_url = os.path.join(SITE_ROOT, 'static', 'data/'+up_down+'_'+line+'_'+time+'_head.json')
+    data = json.load(open(json_url))
+    label, time, score = [], [], []
+    lab = data['schema']['fields']
+    for i in lab:
+        time.append(i['name'])
+    for i in data['data']:
+        label.append(i['역명'])
+        tmp = []
+        for j in range(1, len(lab)):
+            tmp.append(i[time[j]])
+        score.append(tmp)
+    return label, time, score
 
 def ret_map(query):
     SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
@@ -58,3 +74,22 @@ def ret_map(query):
                 name = str(sg[k][i]['star'][0][j][0])
                 folium.Marker([y,x],popup=name, icon=folium.Icon(color=color[1][k],icon="flag")).add_to(m)
     return m._repr_html_()
+
+def ret_heat(query):
+    SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
+    heat_url = os.path.join(SITE_ROOT, 'static', 'data/heat_'+query+'.json')   
+    data = json.load(open(heat_url))
+
+    station, heat, brand = [], [], []
+    lab = data['schema']['fields']
+    for i in lab:
+        station.append(i['name'])
+    station = station[1:]
+
+    for i in data['data']:
+        tmp = []
+        for _, k in i.items():
+            tmp.append(k)
+        brand.append(tmp[0])
+        heat.append(tmp[1:])
+    return station, heat, brand
