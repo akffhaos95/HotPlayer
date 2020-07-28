@@ -6,13 +6,13 @@ import folium
 import make_data
 
 app = Flask(__name__)
-#redis = Redis(host='localhost', port=6379)
+redis = Redis(host='localhost', port=6379)
 
 #메인 페이지  
 @app.route("/")
 def home():
-#    redis.incr('hits')
-    return render_template("index.html", data="hello")#data=redis.get('hits').decode("utf-8"))
+    redis.incr('hits')
+    return render_template("index.html", data=redis.get('hits').decode("utf-8"))
 
 #주말, 평일 정보 페이지
 @app.route("/subway")
