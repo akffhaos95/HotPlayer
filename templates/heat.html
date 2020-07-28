@@ -1,8 +1,9 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-	<meta charset="UTF-8">
+    
+    <head>
+        <meta charset="UTF-8">
 	<title>Generic - Interphase by TEMPLATED</title>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="description" content="" />
@@ -15,6 +16,7 @@
 	<link rel="stylesheet" href="/static/css/style.css" />
 	<link rel="stylesheet" href="/static/css/style-xlarge.css" />
 	<link rel="stylesheet" href="/static/css/dropdown.css" />
+    <link rel="stylesheet" href="/static/js/Chart.HeatMap.S.js" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 </head>
 
@@ -41,42 +43,6 @@
 			</header>
 
 			<div><canvas id="myChart"></canvas></div>
-
-			<div style="float: right; ">
-				{% for j in time %}
-				<div class="dropdown">
-					<button class="dropbtn"
-						style=" border-radius: 10px; box-shadow: 0 3px 0 #0e8c73; font-weight: 600;">{{j}} 승차</button>
-					<div class="dropdown-content">
-						{% for i in list %}
-						<a onclick="updateChart('up', '{{i}}', '{{j}}');">
-							{% if i == 'one' %}1호선
-							{% elif i == 'two' %}2호선
-							{% elif i == 'thr' %}3호선
-							{% else %}전체
-							{% endif %}승차 </a>
-						{% endfor %}
-					</div>
-				</div>
-				{% endfor %}
-				{% for j in time %}
-				<div class="dropdown">
-					<button class="dropbtn"
-						style=" border-radius: 10px; box-shadow: 0 3px 0 #0e8c73; font-weight: 600;">{{j}} 하차</button>
-					<div class="dropdown-content">
-						{% for i in list %}
-						<a onclick="updateChart('down', '{{i}}', '{{j}}');">
-							{% if i == 'one' %}1호선
-							{% elif i == 'two' %}2호선
-							{% elif i == 'thr' %}3호선
-							{% else %}전체
-							{% endif %}하차 </a>
-						{% endfor %}
-					</div>
-				</div>
-				{% endfor %}
-			</div>
-
 			<p class="analysis"></p>
 
 		</div>

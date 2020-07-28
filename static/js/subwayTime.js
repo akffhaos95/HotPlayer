@@ -36,7 +36,18 @@ var getData = $.get('/subwayTime/up/total/아침');
 getData.done(function (result) {
     var data = make_data(result);
     var ctx = document.getElementById('myChart').getContext("2d");
-    var options = {}
+    var options = {
+        responsive: false,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    min: 0,
+                    max: 3000000,
+                    fontSize : 14,
+                }
+            }]
+        }
+    }
     myChart = new Chart(ctx, { type: 'bar', data: data, options: options });
     $('.analysis').text(result.analysis);
 });

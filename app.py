@@ -1,18 +1,19 @@
 from flask import Flask, render_template, json, url_for, jsonify, Markup
+from random import sample
+from redis import Redis
 import os
 import csv
 import folium
-from random import sample
-#from redis import Redis
+import make_map
 
 app = Flask(__name__)
-#redis = Redis(host='redis', port=6379)
+redis = Redis(host='localhost', port=6379)
 
 #메인 페이지  
 @app.route("/")
 def home():
-    #redis.incr('hits')
-    return render_template("index.html")
+    redis.incr('hits')
+    return render_template("index.html", data=redis.get('hits').decode("utf-8"))
 
 #지하철 정보 페이지
 @app.route("/list")
@@ -20,7 +21,7 @@ def list():
     up_down = ['up', 'down']
     list = ['total', 'one', 'two', 'thr']
     time = ['아침', '오전', '점심', '오후', '저녁', '밤']
-    return render_template("list.html", up_down = up_down, list = list, time = time)
+    return render_template("list2.html", up_down = up_down, list = list, time = time)
 
 #지하철 정보
 @app.route("/subwayTime/<up_down>/<line>/<time>")
@@ -51,13 +52,17 @@ def cafeMap(station = '', cafe = ''):
     SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
     csv_url = os.path.join(SITE_ROOT, 'static', 'data/cafe.csv')
     start_coords = (35.8394, 128.757)
-    folium_map = folium.Map(location=start_coords, zoom_start=14)
+    folium_map = folium.Map(location=start_coords, zoom_start=10)
     with open(csv_url, 'r', encoding='utf-8') as f:
         cafe_list = csv.reader(f)
         for i in cafe_list:
             if i[4] == cafe:
                 folium.Marker([i[3],i[2]], popup=i[1], icon=folium.Icon(color='orange')).add_to(folium_map)
     return folium_map._repr_html_()
+
+@app.route("/cafeMap2/<query>")
+def cafeMapQuery(query = ''):
+    return make_map.ret_map(query)
     
 if __name__=="__main__":
     app.run(debug=True, host="0.0.0.0")
