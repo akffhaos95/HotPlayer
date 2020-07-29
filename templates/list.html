@@ -15,38 +15,26 @@
 		</header>
 		<div style="height:400px; float: left;"><canvas style="height:100%;" id="myChart"></canvas></div>
 		<div style="float: right;">
-			{% for j in time %}
-			<div class="dropdown">
-				<button class="dropbtn"
-					style=" border-radius: 10px; box-shadow: 0 3px 0 #0e8c73; font-weight: 600;">{{j}} 승차</button>
-				<div class="dropdown-content">
-					{% for i in list %}
-					<a onclick="updateChart('up', '{{i}}', '{{j}}');">
-						{% if i == 'one' %}1호선
-						{% elif i == 'two' %}2호선
-						{% elif i == 'thr' %}3호선
-						{% else %}전체
-						{% endif %}승차 </a>
-					{% endfor %}
-				</div>
-			</div>
-			{% endfor %}
-			{% for j in time %}
-			<div class="dropdown">
-				<button class="dropbtn"
-					style=" border-radius: 10px; box-shadow: 0 3px 0 #0e8c73; font-weight: 600;">{{j}} 하차</button>
-				<div class="dropdown-content">
-					{% for i in list %}
-					<a onclick="updateChart('down', '{{i}}', '{{j}}');">
-						{% if i == 'one' %}1호선
-						{% elif i == 'two' %}2호선
-						{% elif i == 'thr' %}3호선
-						{% else %}전체
-						{% endif %}하차 </a>
-					{% endfor %}
-				</div>
-			</div>
-			{% endfor %}
+			<ul>
+				{% for i in time %}
+				<input type="radio" id="{{i}}" name="time" value="{{i}}">
+				<label for="{{i}}">{{i}}</label>
+				{% endfor %}
+				<br>
+				{% for j in list %}
+				<input type="radio" id="{{j}}" name="list" value="{{j}}">
+				<label for="{{j}}">{{j}}</label>
+				{% endfor %}
+				<br>
+				{% for h in up_down %}
+				<input type="radio" id="{{h}}" name="up_down" value="{{h}}">
+				<label for="{{h}}">{{h}}</label>
+				{% endfor %}
+				<br>
+				<button class="button" name="submit">
+					조회하기
+				</button>
+			</ul>
 		</div>
 		<p class="analysis"></p>
 	</div>

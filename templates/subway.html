@@ -17,17 +17,16 @@
 		<div class="btn" style="margin-right:20px; margin-left:20px;">
 			{% for i in day %}
 			<br>
-			<button class="dropbtn"
+			<button class="dropbtn" onclick="updateChart('{{i}}');"
 				style="border-radius: 10px; box-shadow: 0 3px 0 #0e8c73; font-weight: 600; margin-left: 30px; margin-bottom: 10px;">
-				<div onclick="updateChart('{{i}}');">
-					{% if i == 'days' %}평일
-					{% elif i == 'ends' %}주말
-					{% elif i == 'travel' %}기차역, 버스터미널역
-					{% elif i == 'school' %}중고등, 대학교 부근
-					{% elif i == 'gather' %}전체이용객 상위역
-					{% elif i == 'house' %}거주지 추정
-					{% else %}다른목적
-					{% endif %}</div>
+				{% if i == 'days' %}평일
+				{% elif i == 'ends' %}주말
+				{% elif i == 'travel' %}기차역, 버스터미널역
+				{% elif i == 'school' %}중고등, 대학교 부근
+				{% elif i == 'gather' %}전체이용객 상위역
+				{% elif i == 'house' %}거주지 추정
+				{% else %}다른목적
+				{% endif %}
 			</button>
 			{% endfor %}
 		</div>

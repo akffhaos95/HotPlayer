@@ -61,3 +61,18 @@ function updateChart(up_down, line, time) {
         $('.analysis').text(result.analysis);
     });
 }
+$(document).ready(function () {
+    $('.button').click(function () {
+        // getter
+        var radioVal1 = $('input[name="time"]:checked').val();
+        var radioVal2 = $('input[name="list"]:checked').val();
+        var radioVal3 = $('input[name="up_down"]:checked').val();
+        var updatedData = $.get('/subwayTime/' + radioVal3 + '/' + radioVal2 + '/' + radioVal1);
+        updatedData.done(function (result) {
+            var data = make_data(result);
+            myChart.data = data;
+            myChart.update();
+            $('.analysis').text(result.analysis);
+        });
+    });
+});
