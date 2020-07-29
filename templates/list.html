@@ -3,6 +3,9 @@
 {{ super() }}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 <script src="{{ url_for('static', filename='js/subwayTime.js') }}"></script>
+<style>
+	#box{float:left; margin-right:opx; margin-top:60px; width:400px; }
+</style>	
 {% endblock %}
 {% block title %}SubwayChart{% endblock %}
 {% block content %}
@@ -14,29 +17,38 @@
 			<h5 style="padding: 0.5em 0em 0em;">대구시의 지하철 유동인구를 확인하고 높은 지역이 실제로 상권이 활성화 되어 있는지 시각적으로 확인할 수 있습니다.</h5>
 		</header>
 		<div style="height:400px; float: left;"><canvas style="height:100%;" id="myChart"></canvas></div>
-		<div style="float: right;">
-			<ul>
-				{% for i in time %}
-				<input type="radio" id="{{i}}" name="time" value="{{i}}">
-				<label for="{{i}}">{{i}}</label>
-				{% endfor %}
-				<br>
-				{% for j in list %}
-				<input type="radio" id="{{j}}" name="list" value="{{j}}">
-				<label for="{{j}}">{{j}}</label>
-				{% endfor %}
-				<br>
-				{% for h in up_down %}
-				<input type="radio" id="{{h}}" name="up_down" value="{{h}}">
-				<label for="{{h}}">{{h}}</label>
-				{% endfor %}
-				<br>
-				<button class="button" name="submit">
-					조회하기
-				</button>
-			</ul>
+		<div id="box" style="float: right;" height=400px; width=100; margin-left:50px;>
+				<ul>
+					{% for i in time %}
+					<input type="radio" id="{{i}}" name="time" value="{{i}}">
+  					<label for="{{i}}">{{i}}</label>
+					{% endfor %}
+					<br><br>
+					{% for j in list %}
+					<input type="radio" id="{{j}}" name="list" value="{{j}}">
+  					<label for="{{j}}">
+						{% if j == 'one' %}1호선
+						{% elif j == 'two' %}2호선
+						{% elif j == 'thr' %}3호선
+						{% else %}전체
+						{% endif %}  
+					</label>
+					{% endfor %}
+					<br><br>
+					{% for h in up_down %}
+					<input type="radio" id="{{h}}" name="up_down" value="{{h}}">
+  					<label for="{{h}}">
+						{% if h == 'up' %}승차
+						{% else %}하차
+						{% endif %}
+					</label>
+					{% endfor %}
+					<br>
+					<button class="button" name="submit">
+						조회하기
+					</button>
+				</ul>
 		</div>
-		<p class="analysis"></p>
 	</div>
 	<div style="clear:both"></div>
 	</div>
