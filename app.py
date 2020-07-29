@@ -17,13 +17,13 @@ def home():
 #주말, 평일 정보 페이지
 @app.route("/subway")
 def subway():
-    day = ['days', 'ends']
+    day = ['days', 'ends', 'travel', 'school', 'gather', 'house']
     return render_template("subway.html", day = day)
 
 @app.route("/subwayDay/<day>")
 def subwayDay(day = 'days'):
     label, time, score = make_data.ret_day(day)
-    analysis = "json_url"
+    analysis = day#make_data.ret_txt(day)
     return jsonify({'label': label, 'time': time[1:], 'score': score, 'analysis': analysis})
 
 #지하철 정보 페이지
@@ -62,7 +62,7 @@ def heat():
 #히트맵 정보
 @app.route("/heatMap/<query>")
 def heatMap(query = "line1"):
-    station, heat, brand = make_data.make_heat(query)
+    station, heat, brand = make_data.ret_heat(query)
     return jsonify({'station': station, 'heat': heat, 'brand': brand})
 
 if __name__=="__main__":

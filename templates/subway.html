@@ -10,29 +10,30 @@
 <section id="main" class="wrapper" style="padding: 2em 0em 4em;">
 	<div class="container">
 		<header class="major" style="margin: 0;">
-			<h3 style="font-weight: 600;">지하철 평일 주말</h3>
+			<h3 style="font-weight: 600;">지하철 평일 주말 월별</h3>
 			<h5 style="padding: 0.5em 0em 0em;">대구시의 지하철 유동인구를 확인하고 높은 지역이 실제로 상권이 활성화 되어 있는지 시각적으로 확인할 수 있습니다.</h5>
 		</header>
-
 		<div style="height:400px; float: left;"><canvas style="height:100%;" id="myChart"></canvas></div>
-
 		<div class="btn" style="margin-right:20px; margin-left:20px;">
 			{% for i in day %}
+			<br>
 			<button class="dropbtn"
-				style=" border-radius: 10px; box-shadow: 0 3px 0 #0e8c73; font-weight: 600; margin-bottom: 10px;">
+				style=" border-radius: 10px; box-shadow: 0 3px 0 #0e8c73; font-weight: 600; margin-left: 30px; margin-bottom: 10px;">
 				<div onclick="updateChart('{{i}}');">
 					{% if i == 'days' %}평일
-					{% else %}주말
+					{% elif i == 'ends' %}주말
+					{% elif i == 'travel' %}기차역, 버스터미널역
+					{% elif i == 'school' %}중고등, 대학교 부근
+					{% elif i == 'gather' %}전체이용객 상위역
+					{% elif i == 'house' %}거주지 추정
+					{% else %}다른목적
 					{% endif %}</div>
 			</button>
 			{% endfor %}
 		</div>
-		<p class="analysis">{{analysis}}</p>
+		<p class="analysis"></p>
 	</div>
 	<div style="clear:both"></div>
-
 	</div>
 </section>
-
-
 {% endblock%}

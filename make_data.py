@@ -35,9 +35,6 @@ def ret_day(day):
         for j in range(1, len(lab)):
             tmp.append(i[time[j]])
         score.append(tmp)
-    print(label)
-    print(time)
-    print(score)
     return label, time, score
 
 def ret_map(query):
@@ -112,3 +109,10 @@ def ret_heat(query):
         brand.append(tmp[0])
         heat.append(tmp[1:])
     return station, heat, brand
+
+def ret_txt(query):
+    SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
+    txt_url = os.path.join(SITE_ROOT, 'static', 'data/'+query+'.txt')  
+    with open(txt_url, mode="rt", encoding='utf-8') as file:
+        lines = file.read()
+        return lines
