@@ -18,7 +18,7 @@
 			{% for i in day %}
 			<br>
 			<button class="dropbtn"
-				style=" border-radius: 10px; box-shadow: 0 3px 0 #0e8c73; font-weight: 600; margin-left: 30px; margin-bottom: 10px;">
+				style="border-radius: 10px; box-shadow: 0 3px 0 #0e8c73; font-weight: 600; margin-left: 30px; margin-bottom: 10px;">
 				<div onclick="updateChart('{{i}}');">
 					{% if i == 'days' %}평일
 					{% elif i == 'ends' %}주말
@@ -31,7 +31,7 @@
 			</button>
 			{% endfor %}
 		</div>
-		<p class="analysis"></p>
+		<pre class="analysis"></pre>
 	</div>
 	<div style="clear:both"></div>
 	</div>

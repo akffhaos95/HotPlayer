@@ -23,7 +23,7 @@ def subway():
 @app.route("/subwayDay/<day>")
 def subwayDay(day = 'days'):
     label, time, score = make_data.ret_day(day)
-    analysis = day#make_data.ret_txt(day)
+    analysis = make_data.ret_txt(day)
     return jsonify({'label': label, 'time': time[1:], 'score': score, 'analysis': analysis})
 
 #지하철 정보 페이지
