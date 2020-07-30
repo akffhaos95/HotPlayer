@@ -1,5 +1,6 @@
 flask
 redis
-flask_sqlalchemy
-pymysql
 folium
+request
+numpy
+pandas
