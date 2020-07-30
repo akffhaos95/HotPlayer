@@ -1,3 +1,4 @@
+#-*- coding:utf-8 -*-
 from flask import Flask, render_template, json, url_for, jsonify, Markup
 from redis import Redis
 import os
