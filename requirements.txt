@@ -1,6 +1,6 @@
 flask
 redis
 folium
-request
+requests
 numpy
 pandas
